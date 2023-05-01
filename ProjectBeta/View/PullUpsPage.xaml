@@ -1,0 +1,671 @@
+﻿<Page x:Class="ProjectBeta.View.PullUpsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ProjectBeta.View"
+      mc:Ignorable="d" 
+      d:DesignHeight="600" d:DesignWidth="1000"
+      Title="PullUpsPage">
+    <Page.Resources>
+        <Style x:Key="ScrollViewerStyle1" TargetType="{x:Type ScrollViewer}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ScrollViewer}">
+                        <Grid x:Name="Grid" >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Rectangle x:Name="Corner" Grid.Column="1" Fill="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" Grid.Row="1"/>
+                            <ScrollContentPresenter x:Name="PART_ScrollContentPresenter" CanContentScroll="{TemplateBinding CanContentScroll}" CanHorizontallyScroll="False" CanVerticallyScroll="False" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" Grid.Column="0" Margin="{TemplateBinding Padding}" Grid.Row="0"/>
+                            <ScrollBar x:Name="PART_VerticalScrollBar" 
+                                   Background="Transparent"
+                                   Opacity="0.2"
+                                   AutomationProperties.AutomationId="VerticalScrollBar" 
+                                   Cursor="Arrow" 
+                                   Grid.Column="1"
+                                   Maximum="{TemplateBinding ScrollableHeight}" 
+                                   Minimum="0" 
+                                   Grid.Row="0" 
+                                   Visibility="Collapsed"
+                                   Value="{Binding VerticalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}"
+                                   ViewportSize="{TemplateBinding ViewportHeight}"/>
+                            <ScrollBar x:Name="PART_HorizontalScrollBar"
+                                   Opacity="0.2"
+                                   AutomationProperties.AutomationId="HorizontalScrollBar"
+                                   Cursor="Arrow" 
+                                   Grid.Column="0"
+                                   Maximum="{TemplateBinding ScrollableWidth}"
+                                   Minimum="0" 
+                                   Orientation="Horizontal"
+                                   Grid.Row="1" 
+                                   Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}"
+                                   Value="{Binding HorizontalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" 
+                                   ViewportSize="{TemplateBinding ViewportWidth}"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <EventTrigger RoutedEvent="MouseEnter">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation To="1" Duration="0:0:0.3" Storyboard.TargetName="PART_VerticalScrollBar" Storyboard.TargetProperty="Opacity" />
+                                        <DoubleAnimation To="1" Duration="0:0:0.3" Storyboard.TargetName="PART_HorizontalScrollBar" Storyboard.TargetProperty="Opacity" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                            <EventTrigger RoutedEvent="MouseLeave">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation To="0.2" Duration="0:0:0.3" Storyboard.TargetName="PART_VerticalScrollBar" Storyboard.TargetProperty="Opacity" />
+                                        <DoubleAnimation To="0.2" Duration="0:0:0.3" Storyboard.TargetName="PART_HorizontalScrollBar" Storyboard.TargetProperty="Opacity" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.3*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.13*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+
+
+        <Grid x:Name="MainWind" Grid.Row="1" Grid.Column="1">
+            <ScrollViewer Style="{DynamicResource ScrollViewerStyle1}" Background="Transparent" CanContentScroll="False">
+                <StackPanel x:Name="Info">
+                    <Border VerticalAlignment="Stretch" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" UseLayoutRounding="True" BorderBrush="White" BorderThickness="10" CornerRadius="10" >
+                        <StackPanel Background="White" >
+                            <Label FontSize="30" Foreground="Black" FontWeight="Bold">
+                                <TextBlock>
+                                    <TextBlock.ToolTip>
+                                        <ToolTip Width="400">
+                                            <StackPanel>
+                                                <TextBlock TextWrapping="Wrap">
+                                                 Встаньте на расстояние 10-15 см от надежно закрепленного вертикального предмета (дверной косяк, балка или пр.) и ухватитесь за него руками на уровне груди. В идеале — если руки будут на ширине плеч. Отклоняясь назад, выпрямляем согнутые в локтях руки. Задерживаемся на секунду и возвращаемся в исходное положение.
+                                                </TextBlock>
+                                                <Image Height="300" Source="Res/Img/1_pullups.jpg" />
+                                            </StackPanel>
+                                        </ToolTip>
+                                    </TextBlock.ToolTip>
+                                    Вертикальные подтягивания
+                                </TextBlock>
+                            </Label>
+
+                            <Border Background="{Binding ElementName=lvl1`,Path=Background}"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" UseLayoutRounding="True" BorderBrush="White" BorderThickness="10" CornerRadius="10" Margin="0">
+                                <Grid Background="{Binding ElementName=lvl1, Path=Background}">
+                                    <CheckBox x:Name="lvl1" Background="White" Foreground="Black" FontSize="15" VerticalAlignment="Center" Margin="0" Checked="CheckBox_Checked" Unchecked="CheckBox_Checked" >
+                                        <TextBlock  VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,-3,0,0">
+                            Начальный уровень: 1 подход по 10 повторений
+                                        </TextBlock>
+                                        <CheckBox.LayoutTransform>
+                                            <ScaleTransform ScaleX="1.5" ScaleY="1.5" />
+                                        </CheckBox.LayoutTransform>
+                                    </CheckBox>
+                                </Grid>
+                            </Border>
+                            <Border Background="{Binding ElementName=lvl2`,Path=Background}"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" UseLayoutRounding="True" BorderBrush="White" BorderThickness="10" CornerRadius="10" Margin="0">
+                                <Grid Background="{Binding ElementName=lvl2, Path=Background}">
+                                    <CheckBox x:Name="lvl2" Background="White" Foreground="Black" FontSize="15" VerticalAlignment="Center" Margin="0" Checked="CheckBox_Checked" Unchecked="CheckBox_Checked" >
+                                        <TextBlock   VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,-3,0,0">
+                            Продвинутый уровень: 2 подхода по 20 повторений
+                                        </TextBlock>
+                                        <CheckBox.LayoutTransform>
+                                            <ScaleTransform ScaleX="1.5" ScaleY="1.5" />
+                                        </CheckBox.LayoutTransform>
+                                    </CheckBox>
+                                </Grid>
+                            </Border>
+                            <Border Background="{Binding ElementName=lvl3`,Path=Background}"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" UseLayoutRounding="True" BorderBrush="White" BorderThickness="10" CornerRadius="10" Margin="0">
+                                <Grid Background="{Binding ElementName=lvl3, Path=Background}">
+                                    <CheckBox x:Name="lvl3" Background="White" Foreground="Black" FontSize="15" VerticalAlignment="Center" Margin="0" Checked="CheckBox_Checked" Unchecked="CheckBox_Checked" >
+                                        <TextBlock   VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,-3,0,0">
+                            Условие перехода: 3 подхода по 40 повторений
+                                        </TextBlock>
+                                        <CheckBox.LayoutTransform>
+                                            <ScaleTransform ScaleX="1.5" ScaleY="1.5" />
+                                        </CheckBox.LayoutTransform>
+                                    </CheckBox>
+                                </Grid>
+                            </Border>
+                        </StackPanel>
+                    </Border>
+
+
+                    <Border VerticalAlignment="Stretch" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" UseLayoutRounding="True" BorderBrush="White" BorderThickness="10" CornerRadius="10" Margin="0,10,0,0">
+                        <StackPanel Background="White" >
+                            <Label FontSize="30" Foreground="Black" FontWeight="Bold">
+                                <TextBlock>
+                                    <TextBlock.ToolTip>
+                                        <ToolTip Width="400">
+                                            <StackPanel>
+                                                <TextBlock TextWrapping="Wrap">
+                                                Необходим предмет, имеющий проем снизу и достаточно устойчивый, чтобы выдержать ваш вес. Навряд ли это ваш стол=). Из горизонтального положения ухватитесь за предмет прямым хватом (руки на ширине плеч) и повисните на прямых руках. Тело держим прямым. Сгибая локти, подтягиваемся вверх до касания поверхности на уровне кистей.                                                
+                                                </TextBlock>
+                                                <Image Height="300" Source="Res/Img/2_pullups.jpg" />
+                                            </StackPanel>
+                                        </ToolTip>
+                                    </TextBlock.ToolTip>
+                                    Горизонтальные подтягивания
+                                </TextBlock>
+                            </Label>
+
+                            <Border Background="{Binding ElementName=lvl4`,Path=Background}"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" UseLayoutRounding="True" BorderBrush="White" BorderThickness="10" CornerRadius="10" Margin="0">
+                                <Grid Background="{Binding ElementName=lvl4, Path=Background}">
+                                    <CheckBox x:Name="lvl4" Background="White" Foreground="Black" FontSize="15" VerticalAlignment="Center" Margin="0" Checked="CheckBox_Checked" Unchecked="CheckBox_Checked" >
+                                        <TextBlock  VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,-3,0,0">
+                            Начальный уровень: 1 подход по 10 повторений
+                                        </TextBlock>
+                                        <CheckBox.LayoutTransform>
+                                            <ScaleTransform ScaleX="1.5" ScaleY="1.5" />
+                                        </CheckBox.LayoutTransform>
+                                    </CheckBox>
+                                </Grid>
+                            </Border>
+                            <Border Background="{Binding ElementName=lvl5`,Path=Background}"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" UseLayoutRounding="True" BorderBrush="White" BorderThickness="10" CornerRadius="10" Margin="0">
+                                <Grid Background="{Binding ElementName=lvl5, Path=Background}">
+                                    <CheckBox x:Name="lvl5" Background="White" Foreground="Black" FontSize="15" VerticalAlignment="Center" Margin="0" Checked="CheckBox_Checked" Unchecked="CheckBox_Checked" >
+                                        <TextBlock   VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,-3,0,0">
+                            Продвинутый уровень: 2 подхода по 20 повторений
+                                        </TextBlock>
+                                        <CheckBox.LayoutTransform>
+                                            <ScaleTransform ScaleX="1.5" ScaleY="1.5" />
+                                        </CheckBox.LayoutTransform>
+                                    </CheckBox>
+                                </Grid>
+                            </Border>
+                            <Border Background="{Binding ElementName=lvl6`,Path=Background}"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" UseLayoutRounding="True" BorderBrush="White" BorderThickness="10" CornerRadius="10" Margin="0">
+                                <Grid Background="{Binding ElementName=lvl6, Path=Background}">
+                                    <CheckBox x:Name="lvl6" Background="White" Foreground="Black" FontSize="15" VerticalAlignment="Center" Margin="0" Checked="CheckBox_Checked" Unchecked="CheckBox_Checked" >
+                                        <TextBlock   VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,-3,0,0">
+                            Условие перехода: 3 подхода по 30 повторений
+                                        </TextBlock>
+                                        <CheckBox.LayoutTransform>
+                                            <ScaleTransform ScaleX="1.5" ScaleY="1.5" />
+                                        </CheckBox.LayoutTransform>
+                                    </CheckBox>
+                                </Grid>
+                            </Border>
+                        </StackPanel>
+                    </Border>
+
+
+                    <Border VerticalAlignment="Stretch" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" UseLayoutRounding="True" BorderBrush="White" BorderThickness="10" CornerRadius="10" Margin="0,10,0,0">
+                        <StackPanel Background="White" >
+                            <Label FontSize="30" Foreground="Black" FontWeight="Bold">
+                                <TextBlock>
+                                    <TextBlock.ToolTip>
+                                        <ToolTip Width="400">
+                                            <StackPanel>
+                                                <TextBlock TextWrapping="Wrap">
+                                                Необходим высокий стул, установленный под турником. Уложите лодыжки на стул (не бедра!). Выпрямите ноги. Высота стула должна быть такой, что в этом положении ваши ноги и корпус образуют угол в 90°. Из такого положения поднимаем себя вверх с помощью рук, отталкиваясь от стула ногами до тех пор, пока подбородок не окажется выше перекладины. После секундной задержки возвращаемся в исходное положение.                                                
+                                                </TextBlock>
+                                                <Image Height="300" Source="Res/Img/3_pullups.jpg" />
+                                            </StackPanel>
+                                        </ToolTip>
+                                    </TextBlock.ToolTip>
+                                    Подтягивание «складной нож»
+                                </TextBlock>
+                            </Label>
+
+                            <Border Background="{Binding ElementName=lvl7`,Path=Background}"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" UseLayoutRounding="True" BorderBrush="White" BorderThickness="10" CornerRadius="10" Margin="0">
+                                <Grid Background="{Binding ElementName=lvl7, Path=Background}">
+                                    <CheckBox x:Name="lvl7" Background="White" Foreground="Black" FontSize="15" VerticalAlignment="Center" Margin="0" Checked="CheckBox_Checked" Unchecked="CheckBox_Checked" >
+                                        <TextBlock  VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,-3,0,0">
+                            Начальный уровень: 1 подход по 10 повторений
+                                        </TextBlock>
+                                        <CheckBox.LayoutTransform>
+                                            <ScaleTransform ScaleX="1.5" ScaleY="1.5" />
+                                        </CheckBox.LayoutTransform>
+                                    </CheckBox>
+                                </Grid>
+                            </Border>
+                            <Border Background="{Binding ElementName=lvl8`,Path=Background}"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" UseLayoutRounding="True" BorderBrush="White" BorderThickness="10" CornerRadius="10" Margin="0">
+                                <Grid Background="{Binding ElementName=lvl8, Path=Background}">
+                                    <CheckBox x:Name="lvl8" Background="White" Foreground="Black" FontSize="15" VerticalAlignment="Center" Margin="0" Checked="CheckBox_Checked" Unchecked="CheckBox_Checked" >
+                                        <TextBlock   VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,-3,0,0">
+                            Продвинутый уровень: 2 подхода по 15 повторений
+                                        </TextBlock>
+                                        <CheckBox.LayoutTransform>
+                                            <ScaleTransform ScaleX="1.5" ScaleY="1.5" />
+                                        </CheckBox.LayoutTransform>
+                                    </CheckBox>
+                                </Grid>
+                            </Border>
+                            <Border Background="{Binding ElementName=lvl9`,Path=Background}"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" UseLayoutRounding="True" BorderBrush="White" BorderThickness="10" CornerRadius="10" Margin="0">
+                                <Grid Background="{Binding ElementName=lvl9, Path=Background}">
+                                    <CheckBox x:Name="lvl9" Background="White" Foreground="Black" FontSize="15" VerticalAlignment="Center" Margin="0" Checked="CheckBox_Checked" Unchecked="CheckBox_Checked" >
+                                        <TextBlock   VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,-3,0,0">
+                            Условие перехода: 3 подхода по 20 повторений
+                                        </TextBlock>
+                                        <CheckBox.LayoutTransform>
+                                            <ScaleTransform ScaleX="1.5" ScaleY="1.5" />
+                                        </CheckBox.LayoutTransform>
+                                    </CheckBox>
+                                </Grid>
+                            </Border>
+                        </StackPanel>
+                    </Border>
+
+
+                    <Border VerticalAlignment="Stretch" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" UseLayoutRounding="True" BorderBrush="White" BorderThickness="10" CornerRadius="10" Margin="0,10,0,0">
+                        <StackPanel Background="White" >
+                            <Label FontSize="30" Foreground="Black" FontWeight="Bold">
+                                <TextBlock>
+                                    <TextBlock.ToolTip>
+                                        <ToolTip Width="400">
+                                            <StackPanel>
+                                                <TextBlock TextWrapping="Wrap">
+                                                Повисните на турнике, ухватившись за него на ширине плеч или чуть шире. Как и в прошлом упражнении скрестите ноги. Подтянитесь до тех пор, пока подбородок не окажется над перекладиной. Пауза в 1 секунду и медленный спуск в исходное положение.
+                                                </TextBlock>
+                                                <Image Height="300" Source="Res/Img/4_pullups.jpg" />
+                                            </StackPanel>
+                                        </ToolTip>
+                                    </TextBlock.ToolTip>
+                                    Неполные подтягивания
+                                </TextBlock>
+                            </Label>
+
+                            <Border Background="{Binding ElementName=lvl10`,Path=Background}"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" UseLayoutRounding="True" BorderBrush="White" BorderThickness="10" CornerRadius="10" Margin="0">
+                                <Grid Background="{Binding ElementName=lvl10, Path=Background}">
+                                    <CheckBox x:Name="lvl10" Background="White" Foreground="Black" FontSize="15" VerticalAlignment="Center" Margin="0" Checked="CheckBox_Checked" Unchecked="CheckBox_Checked" >
+                                        <TextBlock  VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,-3,0,0">
+                            Начальный уровень: 1 подход по 8 повторений
+                                        </TextBlock>
+                                        <CheckBox.LayoutTransform>
+                                            <ScaleTransform ScaleX="1.5" ScaleY="1.5" />
+                                        </CheckBox.LayoutTransform>
+                                    </CheckBox>
+                                </Grid>
+                            </Border>
+                            <Border Background="{Binding ElementName=lvl11`,Path=Background}"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" UseLayoutRounding="True" BorderBrush="White" BorderThickness="10" CornerRadius="10" Margin="0">
+                                <Grid Background="{Binding ElementName=lvl11, Path=Background}">
+                                    <CheckBox x:Name="lvl11" Background="White" Foreground="Black" FontSize="15" VerticalAlignment="Center" Margin="0" Checked="CheckBox_Checked" Unchecked="CheckBox_Checked" >
+                                        <TextBlock   VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,-3,0,0">
+                            Продвинутый уровень: 2 подхода по 11 повторений
+                                        </TextBlock>
+                                        <CheckBox.LayoutTransform>
+                                            <ScaleTransform ScaleX="1.5" ScaleY="1.5" />
+                                        </CheckBox.LayoutTransform>
+                                    </CheckBox>
+                                </Grid>
+                            </Border>
+                            <Border Background="{Binding ElementName=lvl12`,Path=Background}"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" UseLayoutRounding="True" BorderBrush="White" BorderThickness="10" CornerRadius="10" Margin="0">
+                                <Grid Background="{Binding ElementName=lvl12, Path=Background}">
+                                    <CheckBox x:Name="lvl12" Background="White" Foreground="Black" FontSize="15" VerticalAlignment="Center" Margin="0" Checked="CheckBox_Checked" Unchecked="CheckBox_Checked" >
+                                        <TextBlock   VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,-3,0,0">
+                            Условие перехода: 2 подхода по 15 повторений
+                                        </TextBlock>
+                                        <CheckBox.LayoutTransform>
+                                            <ScaleTransform ScaleX="1.5" ScaleY="1.5" />
+                                        </CheckBox.LayoutTransform>
+                                    </CheckBox>
+                                </Grid>
+                            </Border>
+                        </StackPanel>
+                    </Border>
+
+
+                    <Border VerticalAlignment="Stretch" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" UseLayoutRounding="True" BorderBrush="White" BorderThickness="10" CornerRadius="10" Margin="0,10,0,0">
+                        <StackPanel Background="White" >
+                            <Label FontSize="30" Foreground="Black" FontWeight="Bold">
+                                <TextBlock>
+                                    <TextBlock.ToolTip>
+                                        <ToolTip Width="400">
+                                            <StackPanel>
+                                                <TextBlock TextWrapping="Wrap">
+                                                Повисните на турнике, ухватившись за него на ширине плеч или чуть шире. Как и в прошлом упражнении скрестите ноги. Подтянитесь до тех пор, пока подбородок не окажется над перекладиной. Пауза в 1 секунду и медленный спуск в исходное положение.
+                                                </TextBlock>
+                                                <Image Height="300" Source="Res/Img/5_pullups.jpg" />
+                                            </StackPanel>
+                                        </ToolTip>
+                                    </TextBlock.ToolTip>
+                                    Полные подтягивания
+                                </TextBlock>
+                            </Label>
+
+                            <Border Background="{Binding ElementName=lvl13`,Path=Background}"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" UseLayoutRounding="True" BorderBrush="White" BorderThickness="10" CornerRadius="10" Margin="0">
+                                <Grid Background="{Binding ElementName=lvl13, Path=Background}">
+                                    <CheckBox x:Name="lvl13" Background="White" Foreground="Black" FontSize="15" VerticalAlignment="Center" Margin="0" Checked="CheckBox_Checked" Unchecked="CheckBox_Checked" >
+                                        <TextBlock  VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,-3,0,0">
+                            Начальный уровень: 1 подход по 5 повторений
+                                        </TextBlock>
+                                        <CheckBox.LayoutTransform>
+                                            <ScaleTransform ScaleX="1.5" ScaleY="1.5" />
+                                        </CheckBox.LayoutTransform>
+                                    </CheckBox>
+                                </Grid>
+                            </Border>
+                            <Border Background="{Binding ElementName=lvl14`,Path=Background}"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" UseLayoutRounding="True" BorderBrush="White" BorderThickness="10" CornerRadius="10" Margin="0">
+                                <Grid Background="{Binding ElementName=lvl14, Path=Background}">
+                                    <CheckBox x:Name="lvl14" Background="White" Foreground="Black" FontSize="15" VerticalAlignment="Center" Margin="0" Checked="CheckBox_Checked" Unchecked="CheckBox_Checked" >
+                                        <TextBlock   VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,-3,0,0">
+                            Продвинутый уровень: 2 подхода по 8 повторений
+                                        </TextBlock>
+                                        <CheckBox.LayoutTransform>
+                                            <ScaleTransform ScaleX="1.5" ScaleY="1.5" />
+                                        </CheckBox.LayoutTransform>
+                                    </CheckBox>
+                                </Grid>
+                            </Border>
+                            <Border Background="{Binding ElementName=lvl15`,Path=Background}"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" UseLayoutRounding="True" BorderBrush="White" BorderThickness="10" CornerRadius="10" Margin="0">
+                                <Grid Background="{Binding ElementName=lvl15, Path=Background}">
+                                    <CheckBox x:Name="lvl15" Background="White" Foreground="Black" FontSize="15" VerticalAlignment="Center" Margin="0" Checked="CheckBox_Checked" Unchecked="CheckBox_Checked" >
+                                        <TextBlock   VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,-3,0,0">
+                            Условие перехода: 2 подхода по 10 повторений
+                                        </TextBlock>
+                                        <CheckBox.LayoutTransform>
+                                            <ScaleTransform ScaleX="1.5" ScaleY="1.5" />
+                                        </CheckBox.LayoutTransform>
+                                    </CheckBox>
+                                </Grid>
+                            </Border>
+                        </StackPanel>
+                    </Border>
+
+
+                    <Border VerticalAlignment="Stretch" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" UseLayoutRounding="True" BorderBrush="White" BorderThickness="10" CornerRadius="10" Margin="0,10,0,0">
+                        <StackPanel Background="White" >
+                            <Label FontSize="30" Foreground="Black" FontWeight="Bold">
+                                <TextBlock>
+                                    <TextBlock.ToolTip>
+                                        <ToolTip Width="400">
+                                            <StackPanel>
+                                                <TextBlock TextWrapping="Wrap">
+                                                    Выполняем подтягивания прямым хватом, близко расположив друг к другу кисти рук.
+                                                </TextBlock>
+                                                <Image Height="300" Source="Res/Img/6_pullups.jpg" />
+                                            </StackPanel>
+                                        </ToolTip>
+                                    </TextBlock.ToolTip>
+                                    Подтягивания узким хватом
+                                </TextBlock>
+                            </Label>
+
+                            <Border Background="{Binding ElementName=lvl16`,Path=Background}"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" UseLayoutRounding="True" BorderBrush="White" BorderThickness="10" CornerRadius="10" Margin="0">
+                                <Grid Background="{Binding ElementName=lvl16, Path=Background}">
+                                    <CheckBox x:Name="lvl16" Background="White" Foreground="Black" FontSize="15" VerticalAlignment="Center" Margin="0" Checked="CheckBox_Checked" Unchecked="CheckBox_Checked" >
+                                        <TextBlock  VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,-3,0,0">
+                            Начальный уровень: 1 подход по 5 повторений
+                                        </TextBlock>
+                                        <CheckBox.LayoutTransform>
+                                            <ScaleTransform ScaleX="1.5" ScaleY="1.5" />
+                                        </CheckBox.LayoutTransform>
+                                    </CheckBox>
+                                </Grid>
+                            </Border>
+                            <Border Background="{Binding ElementName=lvl17`,Path=Background}"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" UseLayoutRounding="True" BorderBrush="White" BorderThickness="10" CornerRadius="10" Margin="0">
+                                <Grid Background="{Binding ElementName=lvl17, Path=Background}">
+                                    <CheckBox x:Name="lvl17" Background="White" Foreground="Black" FontSize="15" VerticalAlignment="Center" Margin="0" Checked="CheckBox_Checked" Unchecked="CheckBox_Checked" >
+                                        <TextBlock   VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,-3,0,0">
+                            Продвинутый уровень: 2 подхода по 8 повторений
+                                        </TextBlock>
+                                        <CheckBox.LayoutTransform>
+                                            <ScaleTransform ScaleX="1.5" ScaleY="1.5" />
+                                        </CheckBox.LayoutTransform>
+                                    </CheckBox>
+                                </Grid>
+                            </Border>
+                            <Border Background="{Binding ElementName=lvl18`,Path=Background}"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" UseLayoutRounding="True" BorderBrush="White" BorderThickness="10" CornerRadius="10" Margin="0">
+                                <Grid Background="{Binding ElementName=lvl18, Path=Background}">
+                                    <CheckBox x:Name="lvl18" Background="White" Foreground="Black" FontSize="15" VerticalAlignment="Center" Margin="0" Checked="CheckBox_Checked" Unchecked="CheckBox_Checked" >
+                                        <TextBlock   VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,-3,0,0">
+                            Условие перехода: 2 подхода по 10 повторений
+                                        </TextBlock>
+                                        <CheckBox.LayoutTransform>
+                                            <ScaleTransform ScaleX="1.5" ScaleY="1.5" />
+                                        </CheckBox.LayoutTransform>
+                                    </CheckBox>
+                                </Grid>
+                            </Border>
+                        </StackPanel>
+                    </Border>
+
+
+                    <Border VerticalAlignment="Stretch" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" UseLayoutRounding="True" BorderBrush="White" BorderThickness="10" CornerRadius="10" Margin="0,10,0,0">
+                        <StackPanel Background="White" >
+                            <Label FontSize="30" Foreground="Black" FontWeight="Bold">
+                                <TextBlock>
+                                    <TextBlock.ToolTip>
+                                        <ToolTip Width="400">
+                                            <StackPanel>
+                                                <TextBlock TextWrapping="Wrap">
+                                                Возьмитесь за перекладину одной рукой обратным хватом, а другой схватитесь за запястье рабочей руки так, что большой палец нерабочей руки будет находиться под ладонью, а пальцы — под тыльной стороной кисти. Сгибая рабочую руку в локте, подтягивайтесь вверх, пока подбородок не окажется над перекладиной.
+                                                </TextBlock>
+                                                <Image Height="300" Source="Res/Img/7_pullups.jpg" />
+                                            </StackPanel>
+                                        </ToolTip>
+                                    </TextBlock.ToolTip>
+                                    Неравные подтягивания
+                                </TextBlock>
+                            </Label>
+
+                            <Border Background="{Binding ElementName=lvl19`,Path=Background}"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" UseLayoutRounding="True" BorderBrush="White" BorderThickness="10" CornerRadius="10" Margin="0">
+                                <Grid Background="{Binding ElementName=lvl19, Path=Background}">
+                                    <CheckBox x:Name="lvl19" Background="White" Foreground="Black" FontSize="15" VerticalAlignment="Center" Margin="0" Checked="CheckBox_Checked" Unchecked="CheckBox_Checked" >
+                                        <TextBlock  VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,-3,0,0">
+                            Начальный уровень: 1 подход по 5 повторений
+                                        </TextBlock>
+                                        <CheckBox.LayoutTransform>
+                                            <ScaleTransform ScaleX="1.5" ScaleY="1.5" />
+                                        </CheckBox.LayoutTransform>
+                                    </CheckBox>
+                                </Grid>
+                            </Border>
+                            <Border Background="{Binding ElementName=lvl20`,Path=Background}"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" UseLayoutRounding="True" BorderBrush="White" BorderThickness="10" CornerRadius="10" Margin="0">
+                                <Grid Background="{Binding ElementName=lvl20, Path=Background}">
+                                    <CheckBox x:Name="lvl20" Background="White" Foreground="Black" FontSize="15" VerticalAlignment="Center" Margin="0" Checked="CheckBox_Checked" Unchecked="CheckBox_Checked" >
+                                        <TextBlock   VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,-3,0,0">
+                            Продвинутый уровень: 2 подхода по 7 повторений
+                                        </TextBlock>
+                                        <CheckBox.LayoutTransform>
+                                            <ScaleTransform ScaleX="1.5" ScaleY="1.5" />
+                                        </CheckBox.LayoutTransform>
+                                    </CheckBox>
+                                </Grid>
+                            </Border>
+                            <Border Background="{Binding ElementName=lvl21`,Path=Background}"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" UseLayoutRounding="True" BorderBrush="White" BorderThickness="10" CornerRadius="10" Margin="0">
+                                <Grid Background="{Binding ElementName=lvl21, Path=Background}">
+                                    <CheckBox x:Name="lvl21" Background="White" Foreground="Black" FontSize="15" VerticalAlignment="Center" Margin="0" Checked="CheckBox_Checked" Unchecked="CheckBox_Checked" >
+                                        <TextBlock   VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,-3,0,0">
+                            Условие перехода: 2 подхода по 9 повторений
+                                        </TextBlock>
+                                        <CheckBox.LayoutTransform>
+                                            <ScaleTransform ScaleX="1.5" ScaleY="1.5" />
+                                        </CheckBox.LayoutTransform>
+                                    </CheckBox>
+                                </Grid>
+                            </Border>
+                        </StackPanel>
+                    </Border>
+
+
+                    <Border VerticalAlignment="Stretch" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" UseLayoutRounding="True" BorderBrush="White" BorderThickness="10" CornerRadius="10" Margin="0,10,0,0">
+                        <StackPanel Background="White" >
+                            <Label FontSize="30" Foreground="Black" FontWeight="Bold">
+                                <TextBlock>
+                                    <TextBlock.ToolTip>
+                                        <ToolTip Width="400">
+                                            <StackPanel>
+                                                <TextBlock TextWrapping="Wrap">
+                                                Возьмитесь за перекладину одной рукой тем хватом, который вам по нраву. Свободная рука должна находиться в любом комфортном положении. Согните локоть рабочей руки под прямым углом (в этом главное отличие от полных подтягиваний на одной руке) — это исходное положение. Подтянитесь вверх, сгибая локоть до тех пор, пока подбородок не окажется над перекладиной.
+                                                </TextBlock>
+                                                <Image Height="300" Source="Res/Img/8_pullups.jpg" />
+                                            </StackPanel>
+                                        </ToolTip>
+                                    </TextBlock.ToolTip>
+                                    Неполные подтягивания на одной руке
+                                </TextBlock>
+                            </Label>
+
+                            <Border Background="{Binding ElementName=lvl22`,Path=Background}"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" UseLayoutRounding="True" BorderBrush="White" BorderThickness="10" CornerRadius="10" Margin="0">
+                                <Grid Background="{Binding ElementName=lvl22, Path=Background}">
+                                    <CheckBox x:Name="lvl22" Background="White" Foreground="Black" FontSize="15" VerticalAlignment="Center" Margin="0" Checked="CheckBox_Checked" Unchecked="CheckBox_Checked" >
+                                        <TextBlock  VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,-3,0,0">
+                            Начальный уровень: 1 подход по 4 повторений
+                                        </TextBlock>
+                                        <CheckBox.LayoutTransform>
+                                            <ScaleTransform ScaleX="1.5" ScaleY="1.5" />
+                                        </CheckBox.LayoutTransform>
+                                    </CheckBox>
+                                </Grid>
+                            </Border>
+                            <Border Background="{Binding ElementName=lvl23`,Path=Background}"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" UseLayoutRounding="True" BorderBrush="White" BorderThickness="10" CornerRadius="10" Margin="0">
+                                <Grid Background="{Binding ElementName=lvl23, Path=Background}">
+                                    <CheckBox x:Name="lvl23" Background="White" Foreground="Black" FontSize="15" VerticalAlignment="Center" Margin="0" Checked="CheckBox_Checked" Unchecked="CheckBox_Checked" >
+                                        <TextBlock   VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,-3,0,0">
+                            Продвинутый уровень: 2 подхода по 6 повторений
+                                        </TextBlock>
+                                        <CheckBox.LayoutTransform>
+                                            <ScaleTransform ScaleX="1.5" ScaleY="1.5" />
+                                        </CheckBox.LayoutTransform>
+                                    </CheckBox>
+                                </Grid>
+                            </Border>
+                            <Border Background="{Binding ElementName=lvl24`,Path=Background}"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" UseLayoutRounding="True" BorderBrush="White" BorderThickness="10" CornerRadius="10" Margin="0">
+                                <Grid Background="{Binding ElementName=lvl24, Path=Background}">
+                                    <CheckBox x:Name="lvl24" Background="White" Foreground="Black" FontSize="15" VerticalAlignment="Center" Margin="0" Checked="CheckBox_Checked" Unchecked="CheckBox_Checked" >
+                                        <TextBlock   VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,-3,0,0">
+                            Условие перехода: 2 подхода по 8 повторений
+                                        </TextBlock>
+                                        <CheckBox.LayoutTransform>
+                                            <ScaleTransform ScaleX="1.5" ScaleY="1.5" />
+                                        </CheckBox.LayoutTransform>
+                                    </CheckBox>
+                                </Grid>
+                            </Border>
+                        </StackPanel>
+                    </Border>
+
+
+                    <Border VerticalAlignment="Stretch" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" UseLayoutRounding="True" BorderBrush="White" BorderThickness="10" CornerRadius="10" Margin="0,10,0,0">
+                        <StackPanel Background="White" >
+                            <Label FontSize="30" Foreground="Black" FontWeight="Bold" >
+                                <TextBlock>
+                                    <TextBlock.ToolTip>
+                                        <ToolTip Width="400">
+                                            <StackPanel>
+                                                <TextBlock TextWrapping="Wrap">
+                                                Перебросьте полотенце через перекладину, ухватитесь за перекладину одной рукой любым хватом, а другой рукой — за полотенце на уровне глаз. Помогая себе полотенцем подтягиваемся до того момента, как локоть рабочей руки не согнется под прямым углом. Не прерывая подъем, отпускаем полотенце. После спуска вновь схватитесь за полотенце.
+                                                </TextBlock>
+                                                <Image Height="300" Source="Res/Img/9_pullups.jpg" />
+                                            </StackPanel>
+                                        </ToolTip>
+                                    </TextBlock.ToolTip>
+                                    Подтягивания на одной руке с поддержкой
+                                </TextBlock>
+                            </Label>
+
+                            <Border Background="{Binding ElementName=lvl25`,Path=Background}"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" UseLayoutRounding="True" BorderBrush="White" BorderThickness="10" CornerRadius="10" Margin="0">
+                                <Grid Background="{Binding ElementName=lvl25, Path=Background}">
+                                    <CheckBox x:Name="lvl25" Background="White" Foreground="Black" FontSize="15" VerticalAlignment="Center" Margin="0" Checked="CheckBox_Checked" Unchecked="CheckBox_Checked" >
+                                        <TextBlock  VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,-3,0,0">
+                            Начальный уровень: 1 подход по 3 повторений
+                                        </TextBlock>
+                                        <CheckBox.LayoutTransform>
+                                            <ScaleTransform ScaleX="1.5" ScaleY="1.5" />
+                                        </CheckBox.LayoutTransform>
+                                    </CheckBox>
+                                </Grid>
+                            </Border>
+                            <Border Background="{Binding ElementName=lvl26`,Path=Background}"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" UseLayoutRounding="True" BorderBrush="White" BorderThickness="10" CornerRadius="10" Margin="0">
+                                <Grid Background="{Binding ElementName=lvl26, Path=Background}">
+                                    <CheckBox x:Name="lvl26" Background="White" Foreground="Black" FontSize="15" VerticalAlignment="Center" Margin="0" Checked="CheckBox_Checked" Unchecked="CheckBox_Checked" >
+                                        <TextBlock   VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,-3,0,0">
+                            Продвинутый уровень: 2 подхода по 5 повторений
+                                        </TextBlock>
+                                        <CheckBox.LayoutTransform>
+                                            <ScaleTransform ScaleX="1.5" ScaleY="1.5" />
+                                        </CheckBox.LayoutTransform>
+                                    </CheckBox>
+                                </Grid>
+                            </Border>
+                            <Border Background="{Binding ElementName=lvl27`,Path=Background}"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" UseLayoutRounding="True" BorderBrush="White" BorderThickness="10" CornerRadius="10" Margin="0">
+                                <Grid Background="{Binding ElementName=lvl27, Path=Background}">
+                                    <CheckBox x:Name="lvl27" Background="White" Foreground="Black" FontSize="15" VerticalAlignment="Center" Margin="0" Checked="CheckBox_Checked" Unchecked="CheckBox_Checked" >
+                                        <TextBlock   VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,-3,0,0">
+                            Условие перехода: 2 подхода по 7 повторений
+                                        </TextBlock>
+                                        <CheckBox.LayoutTransform>
+                                            <ScaleTransform ScaleX="1.5" ScaleY="1.5" />
+                                        </CheckBox.LayoutTransform>
+                                    </CheckBox>
+                                </Grid>
+                            </Border>
+                        </StackPanel>
+                    </Border>
+
+
+                    <Border VerticalAlignment="Stretch" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" UseLayoutRounding="True" BorderBrush="White" BorderThickness="10" CornerRadius="10" Margin="0,10,0,0">
+                        <StackPanel Background="White" >
+                            <Label FontSize="30" Foreground="Black" FontWeight="Bold">
+                                <TextBlock>
+                                    <TextBlock.ToolTip>
+                                        <ToolTip Width="400">
+                                            <StackPanel>
+                                                <TextBlock TextWrapping="Wrap">
+                                                Выполняем упражнение согласно изображению.
+                                                </TextBlock>
+                                                <Image Height="300" Source="Res/Img/10_pullups.jpg" />
+                                            </StackPanel>
+                                        </ToolTip>
+                                    </TextBlock.ToolTip>
+                                     Подтягивания на одной руке
+                                </TextBlock>
+                            </Label>
+
+                            <Border Background="{Binding ElementName=lvl28`,Path=Background}"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" UseLayoutRounding="True" BorderBrush="White" BorderThickness="10" CornerRadius="10" Margin="0">
+                                <Grid Background="{Binding ElementName=lvl28, Path=Background}">
+                                    <CheckBox x:Name="lvl28" Background="White" Foreground="Black" FontSize="15" VerticalAlignment="Center" Margin="0" Checked="CheckBox_Checked" Unchecked="CheckBox_Checked" >
+                                        <TextBlock  VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,-3,0,0">
+                            Начальный уровень: 1 подход по 1 повторений
+                                        </TextBlock>
+                                        <CheckBox.LayoutTransform>
+                                            <ScaleTransform ScaleX="1.5" ScaleY="1.5" />
+                                        </CheckBox.LayoutTransform>
+                                    </CheckBox>
+                                </Grid>
+                            </Border>
+                            <Border Background="{Binding ElementName=lvl29`,Path=Background}"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" UseLayoutRounding="True" BorderBrush="White" BorderThickness="10" CornerRadius="10" Margin="0">
+                                <Grid Background="{Binding ElementName=lvl29, Path=Background}">
+                                    <CheckBox x:Name="lvl29" Background="White" Foreground="Black" FontSize="15" VerticalAlignment="Center" Margin="0" Checked="CheckBox_Checked" Unchecked="CheckBox_Checked" >
+                                        <TextBlock   VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,-3,0,0">
+                            Продвинутый уровень: 2 подхода по 3 повторений
+                                        </TextBlock>
+                                        <CheckBox.LayoutTransform>
+                                            <ScaleTransform ScaleX="1.5" ScaleY="1.5" />
+                                        </CheckBox.LayoutTransform>
+                                    </CheckBox>
+                                </Grid>
+                            </Border>
+                            <Border Background="{Binding ElementName=lvl30`,Path=Background}"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" UseLayoutRounding="True" BorderBrush="White" BorderThickness="10" CornerRadius="10" Margin="0">
+                                <Grid Background="{Binding ElementName=lvl30, Path=Background}">
+                                    <CheckBox x:Name="lvl30" Background="White" Foreground="Black" FontSize="15" VerticalAlignment="Center" Margin="0" Checked="CheckBox_Checked" Unchecked="CheckBox_Checked" >
+                                        <TextBlock   VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,-3,0,0">
+                            Условие перехода: 2 подхода по 6 повторений
+                                        </TextBlock>
+                                        <CheckBox.LayoutTransform>
+                                            <ScaleTransform ScaleX="1.5" ScaleY="1.5" />
+                                        </CheckBox.LayoutTransform>
+                                    </CheckBox>
+                                </Grid>
+                            </Border>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</Page>
