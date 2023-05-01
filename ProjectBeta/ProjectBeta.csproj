@@ -57,6 +57,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Entities\Days.cs" />
+    <Compile Include="Entities\Exercise.cs" />
+    <Compile Include="ViewModels\TenuresList.cs" />
     <Compile Include="View\BridgePage.xaml.cs">
       <DependentUpon>BridgePage.xaml</DependentUpon>
     </Compile>
